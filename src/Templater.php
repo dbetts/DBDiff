@@ -32,15 +32,21 @@ class Templater {
     }
 
     private function getContent() {
-        $compiler = new BladeCompiler(new Filesystem, ".");
-        $template = $this->getTemplate();
-        $compiled = $compiler->compileString(' ?>'.$template);
         $up = trim($this->up, "\n");
         $down = trim($this->down, "\n");
-        ob_start();
-        eval($compiled);
-        $content = ob_get_contents();
-        ob_end_clean();
+
+        if (is_null($this->params-html) || $this->params->html == true) {
+            $compiler = new BladeCompiler(new Filesystem, ".");
+            $template = $this->getTemplate();
+            $compiled = $compiler->compileString(' ?>' . $template);
+            ob_start();
+            eval($compiled);
+            $content = ob_get_contents();
+            ob_end_clean();
+        } else {
+            $content = $up."\n\n".$down;
+        }
+
         return $content;
     }
 
