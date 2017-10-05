@@ -1,5 +1,6 @@
 <?php namespace DBDiff\DB;
 
+use PDO;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use DBDiff\Exceptions\DBException;
 use Illuminate\Database\Events\StatementPrepared;
