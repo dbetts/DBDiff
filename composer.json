@@ -9,8 +9,8 @@
         }
     },
     "require": {
-        "aura/cli": "2.*@dev",
-        "symfony/yaml": "2.8.*@dev",
+        "aura/cli": ">=2.0@dev",
+        "symfony/yaml": ">=2.8.0@dev",
         "illuminate/database": ">=4.1",
         "illuminate/view": ">=4.1",
         "illuminate/container": ">=4.1",
