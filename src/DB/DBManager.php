@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 use DBDiff\Exceptions\DBException;
+use Illuminate\Events\Dispatcher;
 
 
 class DBManager {
