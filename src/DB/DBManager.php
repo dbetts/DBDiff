@@ -25,7 +25,30 @@ class DBManager {
                 'charset'   => 'utf8',
                 'collation' => 'utf8_unicode_ci'
             ], $key);
+
+            // Added by DSB for laravel 5.5
+            $this->capsule->setAsGlobal();
+            $this->capsule->bootEloquent();
+
+            $dispatcher = new Dispatcher();
+            $dispatcher->listen(StatementPrepared::class, function($event) {
+                $event->statement->setFetchMode(PDO::FETCH_ASSOC);
+            });
+
+            $this->capsule->setEventDispatcher($dispatcher);
+            // End added by DSB
         }
+    }
+
+    // Added new function by DSB
+    public function setFetchMode($fetchMode)
+    {
+        $dispatcher = new Dispatcher();
+        $dispatcher->listen(StatementPrepared::class, function($event) {
+            $event->statement->setFetchMode($fetchMode);
+        });
+
+        $this->capsule->setEventDispatcher($dispatcher);
     }
 
     public function testResources($params) {
